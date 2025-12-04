@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>To-Do List</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <h1>To-do list</h1>
+
+  <form action="/" method="POST">
+    <input type="text" name="newitem" placeholder="Add a new item" autocomplete="off" required>
+    <button type="submit">Add</button>
+  </form>
+
+  <h2>Your Items:</h2>
+  <ul>
+    {{ range $i, $item := .Items }}
+      <li>
+       {{$item}}
+        <form  action="/delete" method="POST" style="display: inline;">
+          <input type="hidden" name="index" value="{{$i}}">
+          <button type="submit">Delete</button>
+        </form>
+      </li>
+    {{ else }}
+      <li>No items yet — add one above.</li>
+    {{ end }}
+  </ul>
+</body>
+</html>
